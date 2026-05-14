@@ -10,9 +10,23 @@ export async function getStaticPaths() {
 const { project } = Astro.props;
 const { data } = project;
 const num = String(data.order).padStart(2, '0');
+
+const creativeWorkSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'CreativeWork',
+  name: data.title,
+  headline: data.tagline,
+  description: data.tldr,
+  creator: { '@type': 'Person', name: 'Liz Myers' },
+  author: { '@type': 'Person', name: 'Liz Myers' },
+  dateCreated: data.year,
+  creativeWorkStatus: data.status,
+  genre: data.kind,
+  url: new URL(`/work/${project.id}/`, Astro.site).toString(),
+};
 ---
 
-<Base title={`${data.title} — Liz Myers`} description={data.tagline} current="work">
+<Base title={`${data.title} — Liz Myers`} description={data.tagline} current="work" schema={creativeWorkSchema}>
   <article class="tldr measure-wide">
     <header class="tldr__placard">
       <span class="placard">Exhibit № {num}</span>

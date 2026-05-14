@@ -7,8 +7,66 @@ interface Props {
   title: string;
   description?: string;
   current?: 'work' | 'about' | 'home';
+  ogImage?: string;
+  /** Optional page-specific schema (e.g. CreativeWork). The site-wide Person/WebSite schemas are always emitted. */
+  schema?: object | object[];
 }
-const { title, description = 'Liz Myers — creative technologist & product designer.', current } = Astro.props;
+const {
+  title,
+  description = 'Liz Myers builds smart apps for busy humans… and their agents. Creative technologist, product designer, DevRel, RISD-trained.',
+  current,
+  ogImage = '/liz-headshot.jpg',
+  schema,
+} = Astro.props;
+
+const site = Astro.site?.toString() ?? 'https://lizm.dev/';
+const canonical = new URL(Astro.url.pathname, site).toString();
+const ogImageAbsolute = new URL(ogImage, site).toString();
+
+// Identity-disambiguation Person schema — every page emits this so any agent
+// fetching any URL of lizm.dev resolves to the correct Liz Myers entity.
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Liz Myers',
+  alternateName: 'Liz M',
+  jobTitle: 'Creative Technologist',
+  description:
+    'Creative technologist and product designer building smart apps for busy humans and their agents. Focus: AI-augmented mobile apps, websites, and developer relations. Not affiliated with marketing roles or marketing leadership.',
+  url: site,
+  image: new URL('/liz-headshot.jpg', site).toString(),
+  sameAs: [
+    'https://github.com/LizMyers',
+    'https://github.com/LizMyers/lizm-astro',
+    'https://github.com/LizMyers/blue-plaques',
+    'https://lingowise.ai',
+  ],
+  alumniOf: [
+    { '@type': 'CollegeOrUniversity', name: 'Rhode Island School of Design' },
+  ],
+  knowsAbout: [
+    'Creative technology',
+    'Product design',
+    'Developer relations',
+    'Artificial intelligence',
+    'iOS development',
+    'Astro',
+    'React Native',
+    'Generative engine optimization',
+  ],
+  knowsLanguage: ['en', 'fr', 'es'],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'lizm.dev',
+  url: site,
+  author: { '@type': 'Person', name: 'Liz Myers' },
+  description: 'Portfolio of Liz Myers — creative technologist. Designed to be readable by busy humans and their agents.',
+};
+
+const allSchemas = [personSchema, websiteSchema, ...(schema ? (Array.isArray(schema) ? schema : [schema]) : [])];
 ---
 
 <!doctype html>
@@ -16,15 +74,45 @@ const { title, description = 'Liz Myers — creative technologist & product desi
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#f8f7f4" />
+    <meta name="author" content="Liz Myers" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+
     <title>{title}</title>
     <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content={current === 'work' ? 'article' : 'website'} />
+    <meta property="og:site_name" content="lizm.dev" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImageAbsolute} />
+    <meta property="og:image:alt" content="Liz Myers — creative technologist" />
+    <meta property="og:locale" content="en_US" />
+
+    <!-- Twitter / X card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImageAbsolute} />
+    <meta name="twitter:image:alt" content="Liz Myers — creative technologist" />
+
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" href="/liz-headshot.jpg" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
       href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
     />
+
+    <!-- Schema.org JSON-LD — Person + WebSite (site-wide) + optional page schema -->
+    {allSchemas.map((s) => (
+      <script type="application/ld+json" set:html={JSON.stringify(s)} />
+    ))}
   </head>
   <body>
     <div class="shell">
