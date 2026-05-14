@@ -198,38 +198,35 @@ img, video { max-width: 100%; height: auto; display: block; }
   gap: var(--space-4);
 }
 .site-foot__row--cta {
-  padding-bottom: var(--space-5);
+  padding: var(--space-5) 0 var(--space-6);
   border-bottom: 1px solid var(--rule);
   margin-bottom: var(--space-4);
-  align-items: center;
-  justify-content: flex-start;
+  display: block;
 }
 
-/* Single "Let's chat" trigger that opens the dialog */
+/* "Want to learn more? Let's chat…" — unmissable */
 .chat-trigger {
-  font-family: var(--font-serif);
-  font-size: var(--fs-h2);
-  font-weight: 400;
   background: none;
   border: 0;
   padding: 0;
   margin: 0;
   cursor: pointer;
+  text-align: left;
+  width: 100%;
   color: var(--ink);
-  line-height: 1;
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0.4em;
-  transition: color 160ms ease;
+  font-family: var(--font-serif);
+  font-weight: 300;
+  font-size: var(--fs-display);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  transition: color 200ms ease;
 }
 .chat-trigger:hover { color: var(--orange); }
-.chat-trigger:hover span { transform: translateX(4px); }
-.chat-trigger span {
+.chat-trigger__arrow {
   display: inline-block;
-  transition: transform 160ms ease;
-  font-family: var(--font-sans);
-  font-size: 0.7em;
+  transition: transform 200ms ease;
 }
+.chat-trigger:hover .chat-trigger__arrow { transform: translateX(8px); }
 
 /* Dialog */
 .chat-dialog {
