@@ -5,7 +5,7 @@ teaser: An AI tutor that teaches you a language through real conversations — f
 year: "2024–25"
 kind: Web + AI
 status: shipped
-order: 2
+order: 4
 tldr: >
   LingoWise teaches languages the way you actually learn them — through real conversations about things you care about. Learners chat with an AI tutor calibrated to their level, capture new vocabulary on the fly as conversation cards, and practice pronunciation in concrete scenarios (market, café, airport). Free, Plus ($4.99), and Pro ($9.99) tiers. Built on Next.js, deployed on Vercel.
 links:

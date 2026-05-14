@@ -5,7 +5,7 @@ teaser: The site you're on. An exhibit about itself — why Astro, and how to bu
 year: "2026"
 kind: Web + Design System
 status: in development
-order: 4
+order: 1
 tldr: >
   The premise: hiring managers don't read portfolios anymore — they ask their AI. So I built one for the AI to read. Static HTML, zero framework JavaScript on the critical path, native `<dialog>` and `<details>` elements instead of libraries, Schema.org structured data in every head, an `llms.txt` index, and raw-markdown endpoints for every page. The aesthetic — "Editorial Museum" — is borrowed from museum catalogs because that's the closest analog to what a portfolio actually is: a small curated set of objects, each with a placard and an essay.
 links:

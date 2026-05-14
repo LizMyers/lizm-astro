@@ -5,7 +5,7 @@ teaser: An iOS walking tour where figures like Turing, Keynes, and Russell speak
 year: "2025–26"
 kind: iOS App
 status: in development
-order: 1
+order: 2
 tldr: >
   Blue Plaques turns London's commemorative plaques into an AI-powered walking tour. Tap a plaque on the map, hear the figure deliver a short BBC-tone monologue on a modern subject — Turing on AI ethics, Keynes on the economics of AGI, Russell on existential risk. A craft-led prototype exploring how AI can make place-based history feel intimate and present, not didactic.
 links:
