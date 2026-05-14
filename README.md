@@ -8,11 +8,17 @@ Hiring managers don't read portfolios anymore. They ask their AI.
 
 So this site is built for that — a small, structured set of pages an LLM agent can ingest, summarise, and cite when someone asks *"what's Liz worked on?"* Humans can read it too (the typography is for them), but the architecture is designed so a busy human's agent can answer the question on their behalf — including booking a 15-minute call.
 
-## The catalyst — Silicon Friendly
+## The catalyst — Silicon Friendly (before / after)
 
 I ran [siliconfriendly.com](https://siliconfriendly.com) against another site of mine. It graded **L0 — Not Silicon Friendly Yet** and failed almost every Level 1 + 2 check: no semantic HTML, no JSON-LD, no server-side rendering, no `robots.txt`, no sitemap, no `/llms.txt`. The site looked fine to humans but was effectively invisible to agents.
 
-That failure is what pointed me at Astro. The whole Silicon Friendly checklist is basically a list of things you get for free — or near-free — when you ship static HTML instead of a hydrated SPA.
+**Before** (the legacy site):
+
+![Silicon Friendly grading the legacy site at L0 with most Level 1 + 2 checks failing](./docs/silicon-friendly-before.jpeg)
+
+That failure is what pointed me at Astro. Most of the Silicon Friendly checklist is *what you get for free* when you ship static HTML instead of a hydrated SPA. The architectural decisions in this repo are direct responses to each failing row.
+
+**After** — once lizm.dev is deployed and the agent-readable bundle is in (JSON-LD, `llms.txt`, `robots.txt`, sitemap), the target is **Silicon Friendly L2** with every Level 1 + 2 row passing. Levels 3–5 are about agent-callable APIs, so they don't apply to a static portfolio. Screenshot will land here once tested.
 
 ## Why Astro
 
@@ -37,7 +43,7 @@ If you're building anything content-led (portfolio, docs, blog, marketing site) 
 
 ## Coming next
 
-Working towards **Silicon Friendly L4 / L5**:
+Targeting **Silicon Friendly L2** (every Level 1 + 2 row passing):
 
 - `llms.txt` + per-page raw markdown endpoints (the agent-readable bundle)
 - `Schema.org/Person` + `CreativeWork` JSON-LD on every page
