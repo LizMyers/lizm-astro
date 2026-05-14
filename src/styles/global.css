@@ -377,8 +377,6 @@ img, video { max-width: 100%; height: auto; display: block; }
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--muted);
-  justify-content: flex-end;
-  gap: var(--space-4);
 }
 .site-foot__badge {
   display: inline-flex;
