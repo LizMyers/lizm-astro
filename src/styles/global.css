@@ -193,7 +193,7 @@ img, video { max-width: 100%; height: auto; display: block; }
 .site-foot__row {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   flex-wrap: wrap;
   gap: var(--space-4);
 }
@@ -377,16 +377,18 @@ img, video { max-width: 100%; height: auto; display: block; }
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: var(--muted);
+  justify-content: flex-end;
+  gap: var(--space-4);
 }
 .site-foot__badge {
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  opacity: 0.9;
+  opacity: 0.8;
   transition: opacity 160ms ease;
 }
 .site-foot__badge:hover { opacity: 1; }
-.site-foot__badge img { height: 2.4rem; width: auto; display: block; }
+.site-foot__badge img { height: 2rem; width: auto; display: block; }
 
 /* Hero — index */
 .hero {
