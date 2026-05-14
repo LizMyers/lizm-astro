@@ -128,27 +128,25 @@ const allSchemas = [personSchema, websiteSchema, ...(schema ? (Array.isArray(sch
         <slot />
       </main>
 
-      <section class="cta" aria-labelledby="cta-heading">
-        <p class="placard cta__eyebrow">Open for conversations</p>
-        <h2 id="cta-heading" class="cta__title">
-          If something here sparked a question, I'd happily talk it through.
-        </h2>
-        <div class="cta__actions">
-          <a class="btn" href="https://cal.com/liz-myers-cypfrw/15-min-intro?overlayCalendar=true" target="_blank" rel="noreferrer noopener">
-            15-min intro →
-          </a>
-          <a class="btn" href="https://cal.com/liz-myers-cypfrw/30min?overlayCalendar=true" target="_blank" rel="noreferrer noopener">
-            30-min deeper →
-          </a>
-          <a class="btn btn--ghost" href="mailto:elizmyers@gmail.com">
-            Or email instead
-          </a>
+      <footer class="site-foot" aria-labelledby="foot-cta">
+        <div class="site-foot__row site-foot__row--cta">
+          <h2 id="foot-cta" class="site-foot__cta-title">Let's chat.</h2>
+          <div class="site-foot__cta-actions">
+            <a class="btn" href="https://cal.com/liz-myers-cypfrw/15-min-intro?overlayCalendar=true" target="_blank" rel="noreferrer noopener">
+              15-min intro →
+            </a>
+            <a class="btn" href="https://cal.com/liz-myers-cypfrw/30min?overlayCalendar=true" target="_blank" rel="noreferrer noopener">
+              30-min deeper →
+            </a>
+            <a class="btn btn--ghost" href="mailto:elizmyers@gmail.com">
+              Email
+            </a>
+          </div>
         </div>
-      </section>
-
-      <footer class="site-foot">
-        <span>© Liz Myers — {new Date().getFullYear()}</span>
-        <span>lizm.dev / no.{String(new Date().getFullYear()).slice(2)}</span>
+        <div class="site-foot__row site-foot__row--meta">
+          <span>© Liz Myers — {new Date().getFullYear()}</span>
+          <span>lizm.dev / no.{String(new Date().getFullYear()).slice(2)}</span>
+        </div>
       </footer>
     </div>
   </body>
