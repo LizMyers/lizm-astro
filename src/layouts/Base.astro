@@ -1,0 +1,67 @@
+---
+import '../styles/global.css';
+import Plaque from '../components/Plaque.astro';
+import Monogram from '../components/Monogram.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  current?: 'work' | 'about' | 'home';
+}
+const { title, description = 'Liz Myers — creative technologist & product designer.', current } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+    />
+  </head>
+  <body>
+    <div class="shell">
+      <nav class="site-nav" aria-label="Primary">
+        {current === 'home' ? <Plaque /> : <Monogram />}
+        <div class="site-nav__links">
+          <a href="/" aria-current={current === 'home' ? 'page' : undefined}>Index</a>
+          <a href="/about" aria-current={current === 'about' ? 'page' : undefined}>About</a>
+        </div>
+      </nav>
+
+      <main>
+        <slot />
+      </main>
+
+      <section class="cta" aria-labelledby="cta-heading">
+        <p class="placard cta__eyebrow">Open for conversations</p>
+        <h2 id="cta-heading" class="cta__title">
+          If something here sparked a question, I'd happily talk it through.
+        </h2>
+        <div class="cta__actions">
+          <a class="btn" href="https://cal.com/liz-myers-cypfrw/15-min-intro?overlayCalendar=true" target="_blank" rel="noreferrer noopener">
+            15-min intro →
+          </a>
+          <a class="btn" href="https://cal.com/liz-myers-cypfrw/30min?overlayCalendar=true" target="_blank" rel="noreferrer noopener">
+            30-min deeper →
+          </a>
+          <a class="btn btn--ghost" href="mailto:elizmyers@gmail.com">
+            Or email instead
+          </a>
+        </div>
+      </section>
+
+      <footer class="site-foot">
+        <span>© Liz Myers — {new Date().getFullYear()}</span>
+        <span>lizm.dev / no.{String(new Date().getFullYear()).slice(2)}</span>
+      </footer>
+    </div>
+  </body>
+</html>

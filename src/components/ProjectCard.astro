@@ -1,0 +1,39 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  teaser: string;
+  year: string;
+  kind: string;
+  status: string;
+  cover?: string;
+  coverAlt?: string;
+  index: number;
+}
+const { href, title, teaser, year, kind, status, cover, coverAlt, index } = Astro.props;
+const num = String(index).padStart(2, '0');
+---
+
+<a class="card" href={href}>
+  <div class="card__frame">
+    {
+      cover ? (
+        <img src={cover} alt={coverAlt ?? ''} loading="lazy" />
+      ) : (
+        <div class="card__placeholder">
+          <span class="card__placeholder-num">{num}</span>
+          <span class="placard">{status}</span>
+        </div>
+      )
+    }
+  </div>
+  <div class="card__meta">
+    <span class="placard">№ {num}</span>
+    <span class="placard">{year}</span>
+    <span class="placard">{kind}</span>
+    <span class="placard" style="color: var(--orange);">{status}</span>
+  </div>
+  <h3 class="card__title">{title}</h3>
+  <p class="card__teaser">{teaser}</p>
+  <span class="card__cta">View exhibit →</span>
+</a>

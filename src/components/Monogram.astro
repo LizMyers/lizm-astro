@@ -1,0 +1,35 @@
+---
+interface Props {
+  size?: number;
+  href?: string;
+}
+const { size = 56, href = '/' } = Astro.props;
+---
+
+<a class="monogram" href={href} aria-label="Liz Myers — back to index">
+  <svg
+    class="monogram__svg"
+    width={size}
+    height={size}
+    viewBox="0 0 100 100"
+    role="img"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle cx="50" cy="50" r="48" fill="#ffffff" />
+    <circle cx="50" cy="50" r="42" fill="#fffbeb" stroke="#1b3a6f" stroke-width="4" />
+    <circle cx="50" cy="50" r="36" fill="none" stroke="#1b3a6f" stroke-width="1" opacity="0.6" />
+    <text
+      x="50"
+      y="52"
+      text-anchor="middle"
+      dominant-baseline="central"
+      font-family="Newsreader, 'Source Serif 4', 'Big Caslon', 'Hoefler Text', Georgia, serif"
+      font-style="italic"
+      font-size="46"
+      font-weight="500"
+      fill="#1b3a6f"
+      letter-spacing="-1"
+    >lm</text>
+  </svg>
+</a>

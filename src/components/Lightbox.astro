@@ -1,0 +1,50 @@
+---
+/*
+ * Agent-friendly image lightbox.
+ * The <img> is always rendered as a real DOM element so crawlers/agents see it.
+ * Click expands it via a native <dialog> — ~6 lines of inline JS, no library.
+ */
+interface Props {
+  src: string;
+  alt: string;
+  caption?: string;
+  bleed?: boolean;
+}
+const { src, alt, caption, bleed = false } = Astro.props;
+const id = `lb-${Math.random().toString(36).slice(2, 9)}`;
+---
+
+<figure class={bleed ? 'bleed' : ''}>
+  <img
+    src={src}
+    alt={alt}
+    class="zoomable"
+    loading="lazy"
+    data-lightbox-target={id}
+  />
+  {caption && <figcaption>{caption}</figcaption>}
+
+  <dialog class="lightbox" id={id}>
+    <button class="lightbox__close" data-lightbox-close aria-label="Close">×</button>
+    <div class="lightbox__inner">
+      <img src={src} alt={alt} />
+    </div>
+  </dialog>
+</figure>
+
+<script>
+  // Single delegated handler — handles every <Lightbox> on the page.
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    const opener = target.closest<HTMLElement>('[data-lightbox-target]');
+    if (opener) {
+      const id = opener.getAttribute('data-lightbox-target');
+      const dlg = id ? (document.getElementById(id) as HTMLDialogElement | null) : null;
+      dlg?.showModal();
+      return;
+    }
+    if (target.matches('[data-lightbox-close]') || target.matches('.lightbox img')) {
+      target.closest<HTMLDialogElement>('dialog.lightbox')?.close();
+    }
+  });
+</script>

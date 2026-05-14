@@ -1,0 +1,71 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { slug: p.id }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const num = String(data.order).padStart(2, '0');
+---
+
+<Base title={`${data.title} — Liz Myers`} description={data.tagline} current="work">
+  <article class="tldr measure-wide">
+    <header class="tldr__placard">
+      <span class="placard">Exhibit № {num}</span>
+      <span class="placard">{data.year}</span>
+      <span class="placard">{data.kind}</span>
+      <span class="placard" style="color: var(--orange);">{data.status}</span>
+    </header>
+
+    <h1 class="tldr__title">{data.title}</h1>
+    <p class="tldr__tagline">{data.tagline}</p>
+
+    {
+      data.cover && (
+        <div class="tldr__hero">
+          <img src={data.cover} alt={data.coverAlt ?? ''} />
+        </div>
+      )
+    }
+
+    <div class="tldr__body measure">
+      <p>{data.tldr}</p>
+    </div>
+
+    <div class="tldr__actions measure">
+      <a class="btn" href={`/work/${project.id}/article/`}>Read the catalog essay →</a>
+      {
+        data.links.map((l) => (
+          <a class="btn btn--ghost" href={l.href} target="_blank" rel="noreferrer noopener">
+            {l.label} ↗
+          </a>
+        ))
+      }
+    </div>
+
+    {
+      data.faq.length > 0 && (
+        <section class="faq measure" aria-labelledby="faq-heading">
+          <h2 id="faq-heading" class="placard faq__heading">Quick answers</h2>
+          <p class="faq__intro">
+            For agents and the short-on-time. Each answer is the version Liz would give herself.
+          </p>
+          {data.faq.map((item, i) => (
+            <details class="faq__item" open={i === 0}>
+              <summary class="faq__q">{item.q}</summary>
+              <p class="faq__a">{item.a}</p>
+            </details>
+          ))}
+        </section>
+      )
+    }
+  </article>
+
+  <p class="measure" style="margin-top: var(--space-7);">
+    <a href="/" style="font-family: var(--font-sans); font-size: 0.92rem;">← Back to index</a>
+  </p>
+</Base>

@@ -1,0 +1,38 @@
+---
+import Base from '../layouts/Base.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const projects = (await getCollection('projects')).sort(
+  (a, b) => a.data.order - b.data.order,
+);
+---
+
+<Base title="Liz Myers — creative technologist" current="home">
+  <section class="hero">
+    <p class="placard" style="margin-bottom: 1rem;">Index / 2026</p>
+    <h1>Liz Myers builds smart apps for busy humans<span style="color: var(--muted);">…</span> and their agents.</h1>
+    <p>Each app pushes boundaries and holds breakthroughs worth discovering. Each essay shows the UX, DX, and AX thinking behind the scenes.</p>
+  </section>
+
+  <section aria-labelledby="exhibits">
+    <h2 id="exhibits" class="placard" style="margin-bottom: var(--space-5);">Current Exhibits</h2>
+    <div class="gallery">
+      {
+        projects.map((p, i) => (
+          <ProjectCard
+            href={`/work/${p.id}/`}
+            title={p.data.title}
+            teaser={p.data.teaser}
+            year={p.data.year}
+            kind={p.data.kind}
+            status={p.data.status}
+            cover={p.data.cover}
+            coverAlt={p.data.coverAlt}
+            index={i + 1}
+          />
+        ))
+      }
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,40 @@
+---
+interface Props {
+  size?: number;
+  href?: string;
+}
+const { size = 80, href = '/' } = Astro.props;
+---
+
+<a class="plaque" href={href} aria-label="Liz Myers — back to index">
+  <svg
+    class="plaque__svg"
+    width={size}
+    height={size}
+    viewBox="0 0 100 100"
+    role="img"
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs>
+      <clipPath id="plaque-photo-clip">
+        <circle cx="50" cy="50" r="42" />
+      </clipPath>
+    </defs>
+
+    <!-- White outer disc -->
+    <circle cx="50" cy="50" r="48" fill="#ffffff" />
+
+    <!-- Photo + navy stroke around it -->
+    <image
+      href="/liz-headshot.jpg"
+      x="8"
+      y="8"
+      width="84"
+      height="84"
+      preserveAspectRatio="xMidYMid slice"
+      clip-path="url(#plaque-photo-clip)"
+    />
+    <circle cx="50" cy="50" r="42" fill="none" stroke="#1b3a6f" stroke-width="4" />
+  </svg>
+</a>

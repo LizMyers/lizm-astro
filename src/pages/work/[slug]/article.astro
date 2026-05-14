@@ -1,0 +1,36 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const projects = await getCollection('projects');
+  return projects.map((p) => ({ params: { slug: p.id }, props: { project: p } }));
+}
+
+const { project } = Astro.props;
+const { data } = project;
+const { Content } = await render(project);
+const num = String(data.order).padStart(2, '0');
+---
+
+<Base title={`${data.title} — Catalog Essay`} description={data.tagline} current="work">
+  <article>
+    <header class="article-head measure-wide">
+      <div class="article-head__placard">
+        <span class="placard">Exhibit № {num}</span>
+        <span class="placard">Catalog Essay</span>
+        <span class="placard">{data.year}</span>
+      </div>
+      <h1 class="article-head__title">{data.title}</h1>
+      <p class="article-head__sub">{data.tagline}</p>
+    </header>
+
+    <div class="prose measure">
+      <Content />
+    </div>
+  </article>
+
+  <p class="measure" style="margin-top: var(--space-7);">
+    <a href={`/work/${project.id}/`} style="font-family: var(--font-sans); font-size: 0.92rem;">← Back to the exhibit</a>
+  </p>
+</Base>
