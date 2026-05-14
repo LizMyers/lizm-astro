@@ -68,3 +68,5 @@ Astro 6 · TypeScript · Newsreader · Inter · JetBrains Mono · Cal.com · Ver
 ---
 
 Built with [Claude Code](https://claude.com/claude-code). © Liz Myers.
+
+_Last updated: 2026-05-14_
