@@ -114,6 +114,9 @@ const allSchemas = [personSchema, websiteSchema, ...(schema ? (Array.isArray(sch
     {allSchemas.map((s) => (
       <script type="application/ld+json" set:html={JSON.stringify(s)} />
     ))}
+
+    <!-- Silicon Friendly badge embed — renders nothing until the site is graded -->
+    <script async src="https://siliconfriendly.com/badge/embed.js"></script>
   </head>
   <body>
     <div class="shell">
@@ -135,6 +138,10 @@ const allSchemas = [personSchema, websiteSchema, ...(schema ? (Array.isArray(sch
         </div>
         <div class="site-foot__row site-foot__row--meta">
           <span>© Liz Myers — {new Date().getFullYear()}</span>
+          <a class="site-foot__badge" href="https://siliconfriendly.com/sites/lizm.dev" target="_blank" rel="noreferrer noopener">
+            <span class="site-foot__badge-host" data-sf-badge></span>
+            <span class="site-foot__badge-fallback">Built to be Silicon Friendly</span>
+          </a>
           <span>lizm.dev / no.{String(new Date().getFullYear()).slice(2)}</span>
         </div>
       </footer>

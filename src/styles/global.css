@@ -357,6 +357,16 @@ img, video { max-width: 100%; height: auto; display: block; }
   letter-spacing: 0.12em;
   color: var(--muted);
 }
+.site-foot__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 160ms ease;
+}
+.site-foot__badge:hover { color: var(--orange); }
+.site-foot__badge-host:not(:empty) + .site-foot__badge-fallback { display: none; }
 
 /* Hero — index */
 .hero {
