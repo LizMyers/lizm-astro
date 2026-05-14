@@ -1,6 +1,6 @@
 # lizm.dev
 
-[![Silicon Friendly](https://siliconfriendly.com/badge/lizm.dev.svg)](https://siliconfriendly.com/w/lizm.dev/)
+[![Silicon Friendly](https://siliconfriendly.com/badge/lizm.dev.svg?theme=light)](https://siliconfriendly.com/w/lizm.dev/)
 
 The source of [lizm.dev](https://lizm.dev) — Liz Myers' personal portfolio, built in Astro.
 

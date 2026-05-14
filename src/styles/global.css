@@ -386,7 +386,7 @@ img, video { max-width: 100%; height: auto; display: block; }
   transition: opacity 160ms ease;
 }
 .site-foot__badge:hover { opacity: 1; }
-.site-foot__badge img { height: 1.5rem; width: auto; display: block; }
+.site-foot__badge img { height: 2.4rem; width: auto; display: block; }
 
 /* Hero — index */
 .hero {
