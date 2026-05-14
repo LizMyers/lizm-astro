@@ -1,5 +1,7 @@
 # lizm.dev
 
+[![Silicon Friendly](https://siliconfriendly.com/badge/lizm.dev.svg)](https://siliconfriendly.com/w/lizm.dev/)
+
 The source of [lizm.dev](https://lizm.dev) — Liz Myers' personal portfolio, built in Astro.
 
 ## Why this site exists
@@ -70,3 +72,4 @@ Astro 6 · TypeScript · Newsreader · Inter · JetBrains Mono · Cal.com · Ver
 Built with [Claude Code](https://claude.com/claude-code). © Liz Myers.
 
 _Last updated: 2026-05-14_
+

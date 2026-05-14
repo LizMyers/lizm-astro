@@ -381,13 +381,12 @@ img, video { max-width: 100%; height: auto; display: block; }
 .site-foot__badge {
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
-  color: var(--muted);
   text-decoration: none;
-  transition: color 160ms ease;
+  opacity: 0.9;
+  transition: opacity 160ms ease;
 }
-.site-foot__badge:hover { color: var(--orange); }
-.site-foot__badge-host:not(:empty) + .site-foot__badge-fallback { display: none; }
+.site-foot__badge:hover { opacity: 1; }
+.site-foot__badge img { height: 1.5rem; width: auto; display: block; }
 
 /* Hero — index */
 .hero {
