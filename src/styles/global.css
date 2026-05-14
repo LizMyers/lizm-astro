@@ -273,11 +273,11 @@ img, video { max-width: 100%; height: auto; display: block; }
 .chat-dialog__close:hover { color: var(--orange); }
 
 .chat-dialog__mascot {
-  font-size: 3.4rem;
+  font-size: 3.6rem;
   line-height: 1;
   margin: 0 0 var(--space-3);
-  animation: mascot-wiggle 2.6s ease-in-out infinite;
   display: inline-block;
+  animation: mascot-wiggle 2.6s ease-in-out infinite;
 }
 @keyframes mascot-wiggle {
   0%, 100% { transform: rotate(-4deg) translateY(0); }
@@ -306,7 +306,9 @@ img, video { max-width: 100%; height: auto; display: block; }
   gap: var(--space-3);
 }
 .chat-option {
-  display: block;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
   text-align: left;
   text-decoration: none;
   color: var(--ink);
@@ -321,15 +323,38 @@ img, video { max-width: 100%; height: auto; display: block; }
   background: var(--paper);
   transform: translateY(-1px);
 }
-.chat-option__head {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  margin-bottom: 0.2em;
-}
 .chat-option__icon {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   line-height: 1;
+  width: 2.8rem;
+  height: 2.8rem;
+  border-radius: 50%;
+  background: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid var(--rule);
+}
+.chat-option__icon--lg {
+  width: 4.6rem;
+  height: 4.6rem;
+  font-size: 2.6rem;
+}
+.chat-option__icon-glyph {
+  display: inline-block;
+  transform: translateY(2px) scale(1.2);
+  transform-origin: center center;
+}
+.chat-option__icon-glyph--surf {
+  transform: translate(-7px, 5px) scale(1.35);
+}
+.chat-option__icon { overflow: visible; }
+.chat-option__text {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15em;
+  min-width: 0;
 }
 .chat-option__title {
   font-family: var(--font-serif);
@@ -341,7 +366,6 @@ img, video { max-width: 100%; height: auto; display: block; }
   font-size: 0.92rem;
   color: var(--muted);
   line-height: 1.45;
-  padding-left: calc(1.3rem + 0.6em);
 }
 @media (prefers-reduced-motion: reduce) {
   .chat-dialog__mascot { animation: none; }

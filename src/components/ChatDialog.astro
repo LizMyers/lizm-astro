@@ -9,9 +9,9 @@
 </button>
 
 <dialog class="chat-dialog" id="chat-dialog" aria-labelledby="chat-dialog-title">
-  <button class="chat-dialog__close" type="button" data-chat-close aria-label="Close">×</button>
-
   <div class="chat-dialog__inner">
+    <button class="chat-dialog__close" type="button" data-chat-close aria-label="Close">×</button>
+
     <div class="chat-dialog__mascot" aria-hidden="true">☕</div>
 
     <h2 class="chat-dialog__title" id="chat-dialog-title">What sort of chat?</h2>
@@ -25,11 +25,11 @@
           target="_blank"
           rel="noreferrer noopener"
         >
-          <span class="chat-option__head">
-            <span class="chat-option__icon" aria-hidden="true">☕</span>
+          <span class="chat-option__icon" aria-hidden="true"><span class="chat-option__icon-glyph">☕</span></span>
+          <span class="chat-option__text">
             <span class="chat-option__title">15-minute coffee break</span>
+            <span class="chat-option__desc">Quick intro, no agenda. Say hello, see if we click.</span>
           </span>
-          <span class="chat-option__desc">Quick intro, no agenda. Say hello, see if we click.</span>
         </a>
       </li>
       <li>
@@ -39,20 +39,20 @@
           target="_blank"
           rel="noreferrer noopener"
         >
-          <span class="chat-option__head">
-            <span class="chat-option__icon" aria-hidden="true">🍣</span>
+          <span class="chat-option__icon" aria-hidden="true"><span class="chat-option__icon-glyph">🍣</span></span>
+          <span class="chat-option__text">
             <span class="chat-option__title">30-minute proper chat</span>
+            <span class="chat-option__desc">Deeper dive — a project, a role, an idea you want to talk through.</span>
           </span>
-          <span class="chat-option__desc">Deeper dive — a project, a role, an idea you want to talk through.</span>
         </a>
       </li>
       <li>
         <a class="chat-option" href="mailto:elizmyers@gmail.com">
-          <span class="chat-option__head">
-            <span class="chat-option__icon" aria-hidden="true">🏄‍♀️</span>
+          <span class="chat-option__icon" aria-hidden="true"><span class="chat-option__icon-glyph chat-option__icon-glyph--surf">🏄‍♀️</span></span>
+          <span class="chat-option__text">
             <span class="chat-option__title">Email, async</span>
+            <span class="chat-option__desc">No calendar gymnastics. Send me a paragraph and I'll write back.</span>
           </span>
-          <span class="chat-option__desc">No calendar gymnastics. Send me a paragraph and I'll write back.</span>
         </a>
       </li>
     </ul>
