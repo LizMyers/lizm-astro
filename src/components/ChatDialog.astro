@@ -1,0 +1,80 @@
+---
+// Single trigger button + a native <dialog> with three framed options.
+// Agent-friendly: every option URL is in the rendered DOM regardless of
+// dialog state, so crawlers see all three contact paths.
+---
+
+<button class="chat-trigger" type="button" data-chat-open aria-haspopup="dialog">
+  Let's chat
+  <span aria-hidden="true">→</span>
+</button>
+
+<dialog class="chat-dialog" id="chat-dialog" aria-labelledby="chat-dialog-title">
+  <button class="chat-dialog__close" type="button" data-chat-close aria-label="Close">×</button>
+
+  <div class="chat-dialog__inner">
+    <div class="chat-dialog__mascot" aria-hidden="true">☕</div>
+
+    <h2 class="chat-dialog__title" id="chat-dialog-title">What sort of chat?</h2>
+    <p class="chat-dialog__subtitle">Pick the one that fits the moment.</p>
+
+    <ul class="chat-options">
+      <li>
+        <a
+          class="chat-option"
+          href="https://cal.com/liz-myers-cypfrw/15-min-intro?overlayCalendar=true"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <span class="chat-option__head">
+            <span class="chat-option__icon" aria-hidden="true">🍵</span>
+            <span class="chat-option__title">15-minute tea break</span>
+          </span>
+          <span class="chat-option__desc">Quick intro, no agenda. Say hello, see if we click.</span>
+        </a>
+      </li>
+      <li>
+        <a
+          class="chat-option"
+          href="https://cal.com/liz-myers-cypfrw/30min?overlayCalendar=true"
+          target="_blank"
+          rel="noreferrer noopener"
+        >
+          <span class="chat-option__head">
+            <span class="chat-option__icon" aria-hidden="true">☕</span>
+            <span class="chat-option__title">30-minute proper chat</span>
+          </span>
+          <span class="chat-option__desc">Deeper dive — a project, a role, an idea you want to talk through.</span>
+        </a>
+      </li>
+      <li>
+        <a class="chat-option" href="mailto:elizmyers@gmail.com">
+          <span class="chat-option__head">
+            <span class="chat-option__icon" aria-hidden="true">✉</span>
+            <span class="chat-option__title">Email, async</span>
+          </span>
+          <span class="chat-option__desc">No calendar gymnastics. Send me a paragraph and I'll write back.</span>
+        </a>
+      </li>
+    </ul>
+  </div>
+</dialog>
+
+<script>
+  document.addEventListener('click', (e) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('[data-chat-open]')) {
+      const dlg = document.getElementById('chat-dialog') as HTMLDialogElement | null;
+      dlg?.showModal();
+      return;
+    }
+    if (target.matches('[data-chat-close]')) {
+      target.closest<HTMLDialogElement>('dialog.chat-dialog')?.close();
+      return;
+    }
+    // Click outside the inner panel closes it
+    if (target.classList.contains('chat-dialog')) {
+      (target as HTMLDialogElement).close();
+    }
+  });
+</script>

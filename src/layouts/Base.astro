@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import Plaque from '../components/Plaque.astro';
 import Monogram from '../components/Monogram.astro';
+import ChatDialog from '../components/ChatDialog.astro';
 
 interface Props {
   title: string;
@@ -128,20 +129,9 @@ const allSchemas = [personSchema, websiteSchema, ...(schema ? (Array.isArray(sch
         <slot />
       </main>
 
-      <footer class="site-foot" aria-labelledby="foot-cta">
+      <footer class="site-foot">
         <div class="site-foot__row site-foot__row--cta">
-          <h2 id="foot-cta" class="site-foot__cta-title">Let's chat.</h2>
-          <div class="site-foot__cta-actions">
-            <a class="btn" href="https://cal.com/liz-myers-cypfrw/15-min-intro?overlayCalendar=true" target="_blank" rel="noreferrer noopener">
-              15-min intro →
-            </a>
-            <a class="btn" href="https://cal.com/liz-myers-cypfrw/30min?overlayCalendar=true" target="_blank" rel="noreferrer noopener">
-              30-min deeper →
-            </a>
-            <a class="btn btn--ghost" href="mailto:elizmyers@gmail.com">
-              Email
-            </a>
-          </div>
+          <ChatDialog />
         </div>
         <div class="site-foot__row site-foot__row--meta">
           <span>© Liz Myers — {new Date().getFullYear()}</span>
