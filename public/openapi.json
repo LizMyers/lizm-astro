@@ -193,5 +193,9 @@
         "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } }
       }
     }
+  },
+  "x-static-site-notes": {
+    "fallback_behavior": "Any request matching /api/* that does not resolve to a known endpoint is rewritten to /api/_not-found.json, returning the standard error envelope. Status code is 200 (static hosting cannot return 404 from a rewrite); the body shape conforms to #/components/schemas/Error.",
+    "rate_limits": "Documented via X-RateLimit-* headers and this spec. Enforcement is delegated to Vercel's edge CDN; clients should expect 429 with Retry-After under abuse conditions but no client-level quota is enforced for normal use."
   }
 }

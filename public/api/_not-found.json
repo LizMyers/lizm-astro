@@ -1,0 +1,8 @@
+{
+  "error": {
+    "code": "not_found",
+    "message": "No API resource at that URL. See documentation for the list of supported endpoints.",
+    "documentation_url": "https://lizm.dev/openapi.json",
+    "agent_card_url": "https://lizm.dev/.well-known/agent.json"
+  }
+}
