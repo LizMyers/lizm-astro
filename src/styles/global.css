@@ -10,6 +10,7 @@
   --navy-hover: #122a52;
   --orange: #e8763a;
   --orange-soft: #f7e0cf;
+  color-scheme: light dark;
 
   /* Type scale — fluid */
   --fs-mono: clamp(0.7rem, 0.66rem + 0.18vw, 0.78rem);
@@ -39,6 +40,44 @@
   --font-serif: "Newsreader", "Source Serif 4", Georgia, "Times New Roman", serif;
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* Dark mode — invert the paper/ink roles, lift the accents for legibility */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #1a1817;          /* warm near-black — slight brown matches the cream's warmth */
+    --paper-warm: #25221f;
+    --ink: #f3f1ec;            /* the cream becomes the text */
+    --ink-soft: #d8d4cc;
+    --muted: #8c887f;
+    --rule: #34302a;
+    --navy: #6c95d8;           /* navy lifted for contrast on dark */
+    --navy-hover: #88aae0;
+    --orange: #ef8c54;
+    --orange-soft: #4a2e1f;
+  }
+  /* Plaque and Monogram fill the navy ring — keep them readable on dark.
+     The SVG uses inline fill attrs, so override via CSS fill property. */
+  .plaque__svg circle[fill="#1b3a6f"],
+  .monogram__svg circle[fill="#1b3a6f"] { fill: var(--navy); }
+  .monogram__svg circle[stroke="#1b3a6f"] { stroke: var(--navy); }
+  .monogram__svg text[fill="#1b3a6f"] { fill: var(--navy); }
+  .plaque__svg circle[fill="#ffffff"] { fill: var(--paper-warm); }
+  .plaque__svg circle[fill="#fffbeb"] { fill: var(--paper-warm); }
+  .monogram__svg circle[fill="#ffffff"] { fill: var(--paper-warm); }
+  .monogram__svg circle[fill="#fffbeb"] { fill: var(--paper-warm); }
+  /* Card placeholder gradient adapts to dark surface */
+  .card__placeholder {
+    background: linear-gradient(135deg, var(--paper-warm) 0%, #1d1a18 100%);
+    color: var(--navy);
+  }
+  /* Buttons: navy on dark needs a brighter background to stay tappable */
+  .btn { background: var(--navy); color: var(--paper); }
+  .btn:hover { background: var(--navy-hover); }
+  /* Chat option discs: white-on-dark looked stark; use warm surface */
+  .chat-option__icon { background: var(--paper-warm); border-color: var(--rule); }
+  /* Dialog backdrop a little less heavy so the dark page reads through */
+  .chat-dialog::backdrop { background: rgba(0, 0, 0, 0.65); }
 }
 
 *, *::before, *::after { box-sizing: border-box; }
