@@ -1,0 +1,197 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "lizm.dev — Portfolio API",
+    "version": "1.0.0",
+    "description": "JSON endpoints describing Liz Myers' portfolio projects. Designed for AI agents and crawlers. All endpoints are read-only, static, and CDN-cached.",
+    "contact": {
+      "name": "Liz Myers",
+      "email": "elizmyers@gmail.com",
+      "url": "https://lizm.dev"
+    },
+    "license": { "name": "Content © Liz Myers — cite with attribution" }
+  },
+  "servers": [{ "url": "https://lizm.dev" }],
+  "paths": {
+    "/api/projects.json": {
+      "get": {
+        "summary": "List all portfolio projects",
+        "operationId": "listProjects",
+        "responses": {
+          "200": {
+            "description": "Collection of projects.",
+            "headers": {
+              "X-RateLimit-Limit": { "schema": { "type": "integer" }, "description": "Requests allowed per window." },
+              "X-RateLimit-Window": { "schema": { "type": "string" }, "description": "Rate-limit window (e.g. 60s)." }
+            },
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "meta"],
+                  "properties": {
+                    "data": { "type": "array", "items": { "$ref": "#/components/schemas/Project" } },
+                    "meta": { "$ref": "#/components/schemas/Meta" }
+                  }
+                }
+              }
+            }
+          },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/api/projects/{slug}.json": {
+      "get": {
+        "summary": "Get a single project by slug",
+        "operationId": "getProject",
+        "parameters": [
+          {
+            "name": "slug",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["lizm-dev", "blue-plaques", "openclaw", "lingowise"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A single project.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "required": ["data", "meta"],
+                  "properties": {
+                    "data": { "$ref": "#/components/schemas/Project" },
+                    "meta": { "$ref": "#/components/schemas/Meta" }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" },
+          "429": { "$ref": "#/components/responses/RateLimited" }
+        }
+      }
+    },
+    "/api/status/{status}.json": {
+      "get": {
+        "summary": "Filter projects by status",
+        "operationId": "filterByStatus",
+        "parameters": [
+          {
+            "name": "status",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "enum": ["in-development", "shipped", "archived", "concept"]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Filtered list of projects.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "data": { "type": "array", "items": { "$ref": "#/components/schemas/ProjectSummary" } },
+                    "meta": { "$ref": "#/components/schemas/Meta" }
+                  }
+                }
+              }
+            }
+          },
+          "404": { "$ref": "#/components/responses/NotFound" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Project": {
+        "type": "object",
+        "required": ["id", "title", "tagline", "status"],
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "tagline": { "type": "string" },
+          "teaser": { "type": "string" },
+          "year": { "type": "string" },
+          "kind": { "type": "string" },
+          "status": { "type": "string", "enum": ["in development", "shipped", "archived", "concept"] },
+          "order": { "type": "integer" },
+          "url": { "type": "string", "format": "uri" },
+          "article_url": { "type": "string", "format": "uri" },
+          "tldr": { "type": "string" },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": { "label": { "type": "string" }, "href": { "type": "string", "format": "uri" } }
+            }
+          },
+          "faq": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": { "q": { "type": "string" }, "a": { "type": "string" } }
+            }
+          }
+        }
+      },
+      "ProjectSummary": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "title": { "type": "string" },
+          "tagline": { "type": "string" },
+          "status": { "type": "string" },
+          "url": { "type": "string", "format": "uri" },
+          "api_url": { "type": "string", "format": "uri" }
+        }
+      },
+      "Meta": {
+        "type": "object",
+        "properties": {
+          "self": { "type": "string", "format": "uri" },
+          "collection": { "type": "string", "format": "uri" },
+          "documentation": { "type": "string", "format": "uri" },
+          "generated_at": { "type": "string", "format": "date-time" },
+          "total": { "type": "integer" }
+        }
+      },
+      "Error": {
+        "type": "object",
+        "required": ["error"],
+        "properties": {
+          "error": {
+            "type": "object",
+            "required": ["code", "message"],
+            "properties": {
+              "code": { "type": "string" },
+              "message": { "type": "string" },
+              "documentation_url": { "type": "string", "format": "uri" }
+            }
+          }
+        }
+      }
+    },
+    "responses": {
+      "NotFound": {
+        "description": "Resource not found.",
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } }
+      },
+      "RateLimited": {
+        "description": "Rate limit exceeded.",
+        "headers": { "Retry-After": { "schema": { "type": "integer" }, "description": "Seconds to wait." } },
+        "content": { "application/json": { "schema": { "$ref": "#/components/schemas/Error" } } }
+      }
+    }
+  }
+}

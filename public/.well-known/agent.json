@@ -1,0 +1,82 @@
+{
+  "schema_version": "1.0",
+  "name": "lizm.dev",
+  "description": "Liz Myers' portfolio. Creative technologist, product designer, DevRel. Designed for agents — every page has a corresponding JSON representation and a markdown source view.",
+  "url": "https://lizm.dev",
+  "owner": {
+    "name": "Liz Myers",
+    "job_title": "Creative Technologist",
+    "contact_email": "elizmyers@gmail.com",
+    "booking_url": "https://cal.com/liz-myers-cypfrw",
+    "github": "https://github.com/LizMyers",
+    "image": "https://lizm.dev/liz-headshot.jpg"
+  },
+  "capabilities": {
+    "read": true,
+    "write": false,
+    "subscribe": false
+  },
+  "endpoints": [
+    {
+      "name": "list_projects",
+      "description": "List every portfolio project with TLDR, FAQ, and links to deeper articles.",
+      "url": "https://lizm.dev/api/projects.json",
+      "method": "GET",
+      "response_type": "application/json"
+    },
+    {
+      "name": "get_project",
+      "description": "Fetch a single project by slug.",
+      "url_template": "https://lizm.dev/api/projects/{slug}.json",
+      "method": "GET",
+      "parameters": [
+        {
+          "name": "slug",
+          "in": "path",
+          "type": "string",
+          "required": true,
+          "enum": ["lizm-dev", "blue-plaques", "openclaw", "lingowise"]
+        }
+      ],
+      "response_type": "application/json"
+    },
+    {
+      "name": "filter_by_status",
+      "description": "List projects filtered by development status.",
+      "url_template": "https://lizm.dev/api/status/{status}.json",
+      "method": "GET",
+      "parameters": [
+        {
+          "name": "status",
+          "in": "path",
+          "type": "string",
+          "required": true,
+          "enum": ["in-development", "shipped", "archived", "concept"]
+        }
+      ],
+      "response_type": "application/json"
+    }
+  ],
+  "rate_limits": {
+    "default": "60 requests per minute per IP",
+    "headers": ["X-RateLimit-Limit", "X-RateLimit-Window"],
+    "documentation": "https://lizm.dev/openapi.json",
+    "on_exceeded": "HTTP 429 with Retry-After header"
+  },
+  "error_format": {
+    "shape": { "error": { "code": "string", "message": "string", "documentation_url": "string" } },
+    "example": {
+      "error": {
+        "code": "not_found",
+        "message": "No project with that slug.",
+        "documentation_url": "https://lizm.dev/openapi.json"
+      }
+    }
+  },
+  "documentation": {
+    "openapi": "https://lizm.dev/openapi.json",
+    "llms_txt": "https://lizm.dev/llms.txt",
+    "human_index": "https://lizm.dev/"
+  },
+  "license": "All content © Liz Myers. Cite freely with attribution."
+}
