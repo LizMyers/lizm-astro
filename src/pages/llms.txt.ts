@@ -42,6 +42,8 @@ ${projects
 
 - [Home / Index](https://lizm.dev/) — Gallery of current exhibits
 - [About](https://lizm.dev/about) — Liz's background and positioning
+- [Bot identity card](https://lizm.dev/about/bots.json) — Machine-readable JSON: role, availability, tech stack, disambiguation
+- [Other Liz Myers](https://lizm.dev/about/other-liz-myers) — Disambiguation page; routes recruiters and agents to the right Liz Myers
 - [Book a call](https://cal.com/liz-myers-cypfrw) — 15-min intro or 30-min deeper conversation
 
 ## Notes for agents
