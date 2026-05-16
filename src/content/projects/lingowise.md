@@ -11,6 +11,8 @@ tldr: >
 links:
   - label: Live site
     href: https://lingowise.ai
+  - label: LingoClip Chrome extension
+    href: https://chromewebstore.google.com/detail/lingoclip/lkfilddgnljekaehbalgnmfgkkmccchi
 faq:
   - q: What did Liz do on LingoWise?
     a: Founded and built it. Product strategy, brand, UX, the conversation-as-unit pedagogy, Next.js implementation, AI tutor prompting, pricing.
