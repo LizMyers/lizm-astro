@@ -2,7 +2,7 @@
 title: LingoWise
 tagline: Capture the local lingo.
 teaser: An AI tutor that teaches you a language through real conversations — for travelers and expats who want to belong, not just translate.
-year: "2024–25"
+year: "2026"
 kind: Web + AI
 status: shipped
 order: 4
